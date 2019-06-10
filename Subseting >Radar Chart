@@ -1,0 +1,41 @@
+install.packages("radarchart")
+
+library(radarchart)
+
+
+#amostrasbugios <- read.csv("Desktop/Andre_Bugios/CD8IFNg_Pre.csv", header=T, sep=";", dec=",") 
+
+amostrasbugios <- read.csv("andre_bugio.csv", header=T, sep=";", dec=",") 
+
+head(amostrasbugios)
+
+#----------Subsetando por tempos de coleta
+
+T1=subset(amostrasbugios, amostrasbugios[3]=="T1")
+head (T1)
+
+T2=subset(amostrasbugios, amostrasbugios[3]=="T2")
+head (T2)
+
+T3=subset(amostrasbugios, amostrasbugios[3]=="T3")
+head (T3)
+
+####
+
+
+#-------Mock vs Stimulados
+
+labs <- T1$Individual
+scores <- list(Bulk=T1$Spot_Bulk, Stimuli=T1$Spot_ptnE)
+# Default 
+chartJSRadar(scores=scores, labs= labs)
+# Especificando escala
+chartJSRadar(scores=scores, labs=labs, maxScale =350, scaleLineWidth=2)
+
+labs <- T2$Individual
+scores <- list(Bulk=T2$Spot_Bulk, Stimuli=T2$Spot_ptnE)
+chartJSRadar(scores=scores, labs=labs, maxScale =350, scaleLineWidth=2)
+
+labs <- T3$Individual
+scores <- list(Bulk=T3$Spot_Bulk, Stimuli=T3$Spot_ptnE)
+chartJSRadar(scores=scores, labs=labs, maxScale =350, scaleLineWidth=2)
